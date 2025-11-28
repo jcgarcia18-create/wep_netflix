@@ -40,7 +40,7 @@
 
 
     <main class="content">
-        <!-- Secciones dinámicas por género -->
+       
         @php
             // Obtener todos los géneros únicos, aunque estén en campos con múltiples géneros separados por coma
             $allGenres = collect();

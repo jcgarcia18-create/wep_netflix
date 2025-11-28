@@ -10,7 +10,7 @@ class Peliculas extends Model
     use HasFactory;
 
     
-    // definimos explícitamente para asegurar la conexión.
+  
     protected $table = 'peliculas'; 
 
     
