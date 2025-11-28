@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Administrar Películas</title>
     
     @vite('resources/css/app.css')
@@ -50,18 +51,19 @@
         <div id="edit-modal-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
             <div id="modal-content">
                 <button onclick="closeModal()" class="close-button">&times;</button>
+                <div id="error-messages" style="color: red; margin-bottom: 10px;"></div>
                 <div id="modal-body">Cargando formulario...</div>
             </div>
         </div>
     </main>
 <script>
-    // Nueva función robusta para aplicar valores y estilos
+   
     function applyInputValues(containerElement) {
-        // Busca TODOS los inputs y textareas dentro del contenido cargado.
+    
         const inputElements = containerElement.querySelectorAll('input[data-value], textarea');
         
         inputElements.forEach(input => {
-            // Asigna el valor (si es un input que usa data-value)
+           
             if (input.dataset.value) {
                 input.value = input.dataset.value;
             }
@@ -83,11 +85,11 @@
                 return response.text();
             })
             .then(html => {
-                // 1. Inserta el HTML del formulario
+                
                 modalBody.innerHTML = html;
                 document.getElementById('modal-content').querySelector('.close-button').onclick = closeModal;
                 
-                // 2. Ejecutamos la función de carga DE FORMA EXPLÍCITA sobre el cuerpo del modal.
+              
                 applyInputValues(modalBody); 
 
             })
@@ -99,32 +101,60 @@
 
     function closeModal() {
         document.getElementById('edit-modal-container').style.display = 'none';
-        // Limpiamos el contenido del modal al cerrarse para prevenir IDs duplicados
+        
         document.getElementById('modal-body').innerHTML = 'Cargando formulario...'; 
+        document.getElementById('error-messages').innerHTML = '';
     }
-    // Nueva función para abrir el formulario de CREACIÓN (usa la ruta create)
+
 function openCreateModal() {
     const modalContainer = document.getElementById('edit-modal-container');
     const modalBody = document.getElementById('modal-body');
+    const errorMessages = document.getElementById('error-messages');
 
     modalContainer.style.display = 'flex';
     modalBody.innerHTML = 'Cargando...';
+    errorMessages.innerHTML = '';
 
-    // La ruta 'admin/peliculas/create' debe devolver el HTML del formulario vacío
+
     fetch('{{ route('admin.peliculas.create') }}')
         .then(response => {
             if (!response.ok) throw new Error('Respuesta de red no válida: ' + response.status);
             return response.text();
         })
         .then(html => {
-            // 1. Inserta el HTML del formulario
+          
             modalBody.innerHTML = html;
             
-            // 2. Asegura que el botón de cerrar funcione (usa la clase del botón)
+        
+            const form = modalBody.querySelector('#peliculaForm');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    const formData = new FormData(form);
+                    
+                    fetch('{{ route('admin.peliculas.store') }}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            }
+
+     
             document.getElementById('modal-content').querySelector('.close-button').onclick = closeModal;
             
-            // 3. ¡SOLUCIÓN CLAVE! Ejecutamos la función de carga de valores y estilos.
-            // Esto asegura que el texto se vea correctamente y que los valores vacíos se asignen.
+         
             applyInputValues(modalBody); 
 
         })
