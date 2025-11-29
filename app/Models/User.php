@@ -50,4 +50,17 @@ class User extends Authenticatable
             'suscripcion_expira' => 'datetime',
         ];
     }
+
+        public function favoritos()
+    {
+        return $this->belongsToMany(
+            Peliculas::class,
+            'favoritos',
+            'user_id',
+            'pelicula_id'
+        )->withTimestamps();
+    }
 }
+
+
+

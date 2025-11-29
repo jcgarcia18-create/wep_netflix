@@ -3,13 +3,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\PeliculasApiController;
+use App\Http\Controllers\FavoritoController;
 use App\Models\User;
 
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return response()->json($request->user());
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
+    
+    // Rutas de favoritos protegidas con autenticación
+    Route::get('/favoritos', [FavoritoController::class, 'index']);
+    Route::post('/favoritos/{peliculaId}', [FavoritoController::class, 'store']);
+    Route::delete('/favoritos/{peliculaId}', [FavoritoController::class, 'destroy']);
+    Route::get('/favoritos/check/{peliculaId}', [FavoritoController::class, 'check']);
 });
+
+
 //api para traerme todos los usuarios
 Route::get('/users', function () {
     return response()->json(User::all());
