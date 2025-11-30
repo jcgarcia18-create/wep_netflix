@@ -6,7 +6,7 @@ use App\Models\HistorialVista;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException; // <-- Importa la excepción
+use Illuminate\Validation\ValidationException; 
 
 class PlaybackController extends Controller
 {
@@ -24,7 +24,7 @@ class PlaybackController extends Controller
             return response()->json(['error' => 'No hay perfil activo.'], 401);
         }
 
-        // --- INICIO DE LA DEPURACIÓN DE VALIDACIÓN ---
+      
         try {
            
             Log::info('PlaybackController: Datos recibidos:', $request->all());
@@ -44,12 +44,10 @@ class PlaybackController extends Controller
             ]);
             return response()->json(['error' => 'Datos inválidos.'], 422);
         }
-        // --- FIN DE LA DEPURACIÓN DE VALIDACIÓN ---
+   
 
         try {
-            // Intenta guardar en MongoDB
-
-            // Obtener el nombre de la película
+           
             $pelicula = \App\Models\Peliculas::find($data['pelicula_id']);
             $nombrePelicula = $pelicula ? $pelicula->title : null;
 
@@ -64,7 +62,7 @@ class PlaybackController extends Controller
             return response()->json(['success' => true]);
 
         } catch (\Exception $e) {
-            // Captura cualquier error de MongoDB
+           
             Log::critical('PlaybackController: ¡¡ERROR DE MONGODB!!', [
                 'mensaje' => $e->getMessage(),
                 'perfil_id' => $perfilId,

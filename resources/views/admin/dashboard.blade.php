@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 
 </head>
-<body style="background-color: #111827;">
+<body class="admin-body">
 
     <nav class="admin-sidebar">
         <h2>Admin Netflix</h2>
