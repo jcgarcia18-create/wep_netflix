@@ -23,4 +23,17 @@ class Peliculas extends Model
         'duration_minutes', 
         'genre',
     ];
+
+         //Para saber qué usuarios le dieron like a esta película.
+    public function usuariosQueLaGuardaron()
+    {
+        return $this->belongsToMany(
+            User::class, 
+            'favoritos', 
+            'pelicula_id', 
+            'user_id'
+        )->withTimestamps();
+    }
+
+
 }

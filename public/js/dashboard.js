@@ -147,4 +147,27 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.boxShadow = 'none';
         });
     });
+
+    // Menú desplegable de perfil
+    const profileBtn = document.getElementById('profileMenuBtn');
+    const profileMenu = document.getElementById('profileMenu');
+
+    if (profileBtn && profileMenu) {
+        profileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileMenu.classList.toggle('active');
+        });
+
+        // Cerrar el menú cuando se haga clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+                profileMenu.classList.remove('active');
+            }
+        });
+
+        // Prevenir que el menú se cierre al hacer clic dentro de él
+        profileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 });
