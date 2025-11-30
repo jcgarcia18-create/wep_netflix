@@ -1,0 +1,407 @@
+:root {
+    --azul: #001F3F;
+    --dorado: #FFD700;
+    --blanco: #ffffff;
+    --gris: #9ca3af;
+    --error: #ff4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--azul) 0%, #012040 100%);
+    color: var(--blanco);
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.profiles-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+.profiles-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--dorado);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: var(--blanco);
+}
+
+.profiles-header h1 {
+    font-size: 2.5rem;
+    color: var(--dorado);
+    margin-bottom: 0.5rem;
+}
+
+/* Alertas */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #4ade80;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #ff6666;
+}
+
+/* Grid de perfiles */
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Tarjeta de perfil */
+.profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+    border-color: var(--dorado);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--dorado);
+}
+
+.kids-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff6b6b;
+    color: var(--blanco);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 1.3rem;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+/* Agregar perfil */
+.add-profile {
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.add-profile:hover {
+    border-color: var(--dorado);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.add-profile-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--dorado);
+    height: 100%;
+    min-height: 250px;
+}
+
+.add-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.add-profile:hover .add-icon {
+    background: rgba(255, 215, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.add-profile-btn h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-edit {
+    background: var(--dorado);
+    color: var(--azul);
+}
+
+.btn-edit:hover {
+    background: var(--blanco);
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background: transparent;
+    color: var(--error);
+    border: 2px solid var(--error);
+}
+
+.btn-delete:hover {
+    background: var(--error);
+    color: var(--blanco);
+}
+
+.btn-primary {
+    background: var(--dorado);
+    color: var(--azul);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background: var(--blanco);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--blanco);
+    border: 2px solid var(--dorado);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.btn-secondary:hover {
+    background: var(--dorado);
+    color: var(--azul);
+}
+
+/* Info de perfiles */
+.profiles-info {
+    text-align: center;
+    color: var(--gris);
+    font-size: 0.95rem;
+}
+
+/* Formulario de perfil */
+.profile-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 12px;
+    padding: 3rem;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-preview {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.preview-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.preview-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--dorado);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: var(--dorado);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    padding: 0.9rem 1.2rem;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--blanco);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--dorado);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.form-control.is-invalid {
+    border-color: var(--error);
+}
+
+.form-hint {
+    color: var(--gris);
+    font-size: 0.85rem;
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.85rem;
+}
+
+/* Checkbox personalizado */
+.checkbox-group {
+    margin: 1rem 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-custom {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--dorado);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom {
+    background: var(--dorado);
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom::after {
+    content: '✓';
+    color: var(--azul);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.checkbox-text {
+    color: var(--blanco);
+    font-weight: 500;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profiles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .profile-form-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .profiles-header h1 {
+        font-size: 2rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}

@@ -1,112 +1,242 @@
-/*
- * --- ESTILOS PARA LA SELECCIÓN DE PERFILES ---
- */
+:root {
+    --azul: #001F3F;
+    --dorado: #FFD700;
+    --blanco: #ffffff;
+    --gris: #9ca3af;
+}
 
-/* Contenedor principal de la lista de perfiles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.profile-container { 
-    text-align: center; 
-  
-    display: grid;
-    place-items: center;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--azul) 0%, #012040 100%);
+    color: var(--blanco);
     min-height: 100vh;
 }
-.profile-grid { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 2vw; 
+
+/* Contenedor de selección de perfiles */
+.profile-selection-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-.profile-card { 
-    text-align: center; 
-    cursor: pointer; 
+
+.profile-selection-header {
+    padding: 2rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 }
-.profile-card img { 
-    width: 150px; 
-    height: 150px; 
-    border-radius: 8px; 
-    border: 4px solid transparent; 
-    transition: border-color 0.3s; 
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--blanco);
 }
-.profile-card:hover img { 
-    border-color: white; 
+
+.logo span {
+    color: var(--dorado);
 }
-.profile-card .profile-name { 
-    margin-top: 10px; 
-    font-size: 1.2rem; 
-    color: #9ca3af; 
-    transition: color 0.3s; 
+
+.profile-selection-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
 }
-.profile-card:hover .profile-name { 
-    color: white; 
+
+.profile-selection-content h1 {
+    font-size: 3rem;
+    color: var(--blanco);
+    margin-bottom: 3rem;
+    text-align: center;
 }
-.add-profile-box {
-    width: 150px;
-    height: 150px;
-    border-radius: 8px;
-    background-color: #374151; 
+
+.profile-selection-grid {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    font-size: 5rem; 
-    color: #9ca3af; 
-    line-height: 0;
-    
-    transition: background-color 0.3s, color 0.3s;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
-/* Efecto hover sobre la tarjeta */
-.add-profile:hover .add-profile-box {
-    background-color: #4b5563; 
-    color: white; 
+.profile-selection-card {
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.profile-selection-card:hover {
+    transform: scale(1.1);
+}
+
+.profile-selection-avatar {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1rem;
+}
+
+.profile-selection-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border: 4px solid transparent;
+    object-fit: cover;
+    transition: border-color 0.3s ease;
+}
+
+.profile-selection-card:hover .profile-selection-avatar img {
+    border-color: var(--dorado);
+}
+
+.kids-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff6b6b;
+    color: var(--blanco);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.profile-selection-name {
+    font-size: 1.3rem;
+    color: var(--gris);
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.profile-selection-card:hover .profile-selection-name {
+    color: var(--blanco);
+}
+
+/* Agregar perfil */
+.add-profile-card .profile-selection-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+    border-radius: 12px;
+}
+
+.add-profile-card:hover .profile-selection-avatar {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--dorado);
+}
+
+.add-avatar {
+    color: var(--dorado);
+}
+
+.add-profile-card:hover .add-avatar {
+    transform: scale(1.1);
+}
+
+/* Enlace de administrar perfiles */
+.manage-profiles-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    border-radius: 8px;
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.manage-profiles-link:hover {
+    background: var(--dorado);
+    color: var(--azul);
+    border-color: var(--dorado);
+    transform: translateY(-2px);
 }
 
 
 
+/* Formulario de crear perfil */
 .form-container { 
-    max-width: 500px; 
+    max-width: 600px; 
     margin: 50px auto; 
-    background: #1f2937; 
-    padding: 30px; 
-    border-radius: 8px; 
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    padding: 2.5rem; 
+    border-radius: 12px; 
 }
+
 .form-group { 
-    margin-bottom: 20px; 
+    margin-bottom: 1.5rem; 
 }
+
 .form-group label { 
     display: block; 
-    margin-bottom: 5px; 
+    margin-bottom: 0.5rem; 
     font-weight: 600; 
+    color: var(--dorado);
 }
+
 .form-group input[type="text"], 
 .form-group input[type="url"] { 
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #4b5563;
-    background: #374151;
-    color: white; 
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--blanco);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
 }
+
+.form-group input[type="text"]:focus,
+.form-group input[type="url"]:focus {
+    outline: none;
+    border-color: var(--dorado);
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .form-group input[type="checkbox"] { 
     margin-right: 10px; 
 }
+
 .btn-primary { 
-    background-color: #e11d48; 
-    color: white; 
-    padding: 10px 20px; 
+    background-color: var(--dorado); 
+    color: var(--azul); 
+    padding: 1rem 2rem; 
     border: none; 
-    border-radius: 4px; 
+    border-radius: 8px; 
     cursor: pointer; 
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
 }
 
+.btn-primary:hover {
+    background: var(--blanco);
+    transform: translateY(-2px);
+}
 
-/* --- ESTILOS PARA EL SELECTOR DE AVATAR --- */
-
+/* Selector de avatar */
 .avatar-grid {
     display: flex;
-    flex-wrap: wrap; /* Para que se ajusten si son muchos */
-    gap: 15px; /* Espacio entre avatares */
+    flex-wrap: wrap;
+    gap: 15px;
     margin-top: 10px;
 }
 
@@ -115,27 +245,44 @@
     position: relative;
 }
 
-
 .avatar-option input[type="radio"] {
     display: none;
 }
 
-/* 2. Estilo de la imagen del avatar */
 .avatar-option img {
     width: 100px; 
     height: 100px;
-    border-radius: 6px;
-    border: 3px solid transparent; 
-    transition: border-color 0.2s;
+    border-radius: 8px;
+    border: 3px solid rgba(255, 215, 0, 0.3); 
+    transition: all 0.3s ease;
 }
 
-/* 3. Estilo para el avatar que está SELECCIONADO */
 .avatar-option input[type="radio"]:checked + img {
-    border-color: white; 
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    border-color: var(--dorado); 
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
 }
 
-/* 4. Efecto hover  */
 .avatar-option:hover img {
-    border-color: #9ca3af; 
+    border-color: var(--dorado); 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-selection-content h1 {
+        font-size: 2rem;
+    }
+
+    .profile-selection-grid {
+        gap: 2rem;
+    }
+
+    .profile-selection-avatar {
+        width: 140px;
+        height: 140px;
+    }
+
+    .profile-selection-name {
+        font-size: 1.1rem;
+    }
 }
