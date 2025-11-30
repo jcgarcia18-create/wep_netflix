@@ -59,6 +59,113 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+}
+
+/* Menú desplegable de perfil */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 2px solid var(--dorado);
+    color: var(--blanco);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-btn:hover {
+    background: var(--dorado);
+    color: var(--azul);
+    border-color: var(--dorado);
+}
+
+.profile-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.profile-btn:hover .arrow-icon {
+    transform: translateY(2px);
+}
+
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: rgba(0, 15, 30, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    min-width: 280px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 1001;
+}
+
+.profile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.5rem;
+    color: var(--blanco);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-menu-item:hover {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--dorado);
+}
+
+.profile-menu-item svg {
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.profile-menu-divider {
+    height: 1px;
+    background: rgba(255, 215, 0, 0.2);
+    margin: 0.5rem 0;
+}
+
+.logout-item {
+    color: #ff4444;
+}
+
+.logout-item:hover {
+    background: rgba(255, 68, 68, 0.15);
+    color: #ff6666;
+}
+
+.profile-menu form {
+    margin: 0;
 }
 
 /* Botones generales */
