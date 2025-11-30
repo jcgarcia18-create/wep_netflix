@@ -4,11 +4,34 @@
     --blanco: #ffffff;
 }
 
+/* Modo Oscuro (por defecto) */
+body.dark-mode {
+    --bg-primary: #001F3F;
+    --bg-secondary: rgba(0, 31, 63, 0.95);
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 215, 0, 0.2);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Modo Claro */
+body.light-mode {
+    --bg-primary: #f5f1e8;
+    --bg-secondary: #faf8f3;
+    --text-primary: #2d3748;
+    --text-secondary: #5a5a5a;
+    --card-bg: #fefdfb;
+    --border-color: rgba(139, 117, 82, 0.15);
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--azul);
-    color: var(--blanco);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -16,19 +39,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 31, 63, 0.95);
+    background-color: var(--bg-secondary);
     padding: 1rem 2rem;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
     box-sizing: border-box;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
 }
 
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: var(--blanco);
+    color: var(--text-primary);
 }
 
 .logo span {
@@ -44,7 +70,7 @@ body {
 }
 
 .menu a {
-    color: var(--blanco);
+    color: var(--text-primary);
     text-decoration: none;
     transition: color 0.3s ease;
     font-weight: 500;
@@ -73,7 +99,7 @@ body {
     gap: 0.5rem;
     background: transparent;
     border: 2px solid var(--dorado);
-    color: var(--blanco);
+    color: var(--text-primary);
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     cursor: pointer;
@@ -89,6 +115,23 @@ body {
     border-color: var(--dorado);
 }
 
+.profile-avatar-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 2px solid var(--dorado);
+}
+
+.kids-badge-small {
+    background: #ff6b6b;
+    color: var(--blanco);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
 .profile-btn svg {
     transition: transform 0.3s ease;
 }
@@ -101,9 +144,9 @@ body {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    background: rgba(0, 15, 30, 0.98);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     min-width: 280px;
     padding: 0.5rem 0;
@@ -111,8 +154,13 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow);
     z-index: 1001;
+}
+
+body.light-mode .profile-menu {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
 }
 
 .profile-menu.active {
@@ -126,7 +174,7 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.9rem 1.5rem;
-    color: var(--blanco);
+    color: var(--text-primary);
     text-decoration: none;
     transition: all 0.2s ease;
     font-size: 0.95rem;
@@ -153,6 +201,15 @@ body {
     height: 1px;
     background: rgba(255, 215, 0, 0.2);
     margin: 0.5rem 0;
+}
+
+.profile-switch-item {
+    color: var(--dorado);
+    font-weight: 600;
+}
+
+.profile-switch-item:hover {
+    background: rgba(255, 215, 0, 0.25);
 }
 
 .logout-item {
@@ -302,7 +359,8 @@ body {
     transition: all 0.3s ease;
     border-radius: 8px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
 }
 
 .movie-card:hover {
@@ -446,7 +504,8 @@ body {
 footer {
     text-align: center;
     padding: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--blanco);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
     font-size: 0.9rem;
+    background: var(--bg-secondary);
 }
