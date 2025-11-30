@@ -97,9 +97,6 @@
                             <path d="M12 16v-4m0-4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                         Ayuda
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: auto;">
-                            <path d="M3 3L9 9M9 3L3 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
                     </a>
                     <div class="profile-menu-divider"></div>
                     <form method="POST" action="{{ route('logout') }}">

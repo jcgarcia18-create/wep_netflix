@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 // Ruta del dashboard de USUARIO NORMAL
 Route::get('/dashboard', function () {
-    $perfilId = session('active_profile_id');
-    $profile = \App\Models\Profile::find($perfilId);
+    // --- 1. LÓGICA DEL CATÁLOGO GENERAL 
+    $peliculas = Peliculas::all(); // Obtiene todas las películas de Postgres
 
     // --- 2. LÓGICA DE "SEGUIR VIENDO" 
     $perfilId = session('active_profile_id'); // Obtiene el perfil de la sesión
