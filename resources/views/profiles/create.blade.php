@@ -19,7 +19,7 @@
         </header>
 
         <div class="profile-form-container">
-            <form action="{{ route('user-profiles.store') }}" method="POST" class="profile-form">
+            <form action="{{ route('user-profiles.store') }}" method="POST" enctype="multipart/form-data" class="profile-form">
                 @csrf
                 
                 <div class="form-preview">
@@ -46,17 +46,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="avatar_url">URL del Avatar (opcional)</label>
-                    <input 
-                        type="url" 
-                        id="avatar_url" 
-                        name="avatar_url" 
-                        class="form-control @error('avatar_url') is-invalid @enderror" 
-                        value="{{ old('avatar_url') }}"
-                        placeholder="https://ejemplo.com/imagen.jpg"
-                    >
-                    <small class="form-hint">Deja en blanco para usar un avatar automático</small>
-                    @error('avatar_url')
+                    <label for="avatar_file">Subir foto de perfil</label>
+                    <div class="file-upload-container">
+                        <input 
+                            type="file" 
+                            id="avatar_file" 
+                            name="avatar_file" 
+                            class="file-input @error('avatar_file') is-invalid @enderror"
+                            accept="image/jpeg,image/png,image/jpg,image/gif"
+                        >
+                        <label for="avatar_file" class="file-upload-label">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span id="fileName">Seleccionar imagen</span>
+                        </label>
+                    </div>
+                    <small class="form-hint">Formatos: JPG, PNG, GIF (máx. 2MB)</small>
+                    @error('avatar_file')
                         <span class="error-message">{{ $message }}</span>
                     @enderror
                 </div>
@@ -91,22 +98,38 @@
     <script>
         // Actualizar preview del avatar en tiempo real
         const nombreInput = document.getElementById('nombre_perfil');
-        const avatarUrlInput = document.getElementById('avatar_url');
+        const avatarFileInput = document.getElementById('avatar_file');
         const avatarImg = document.getElementById('avatarImg');
+        const fileNameSpan = document.getElementById('fileName');
 
-        function updateAvatar() {
-            const avatarUrl = avatarUrlInput.value;
-            const nombre = nombreInput.value || 'Usuario';
-            
-            if (avatarUrl) {
-                avatarImg.src = avatarUrl;
+        // Preview de imagen subida
+        avatarFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Actualizar nombre del archivo
+                fileNameSpan.textContent = file.name;
+                
+                // Mostrar preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    avatarImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
             } else {
+                fileNameSpan.textContent = 'Seleccionar imagen';
+                updateAvatarFromName();
+            }
+        });
+
+        // Actualizar avatar con nombre
+        function updateAvatarFromName() {
+            const nombre = nombreInput.value || 'Usuario';
+            if (!avatarFileInput.files.length) {
                 avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombre)}&background=FFD700&color=001F3F&size=200`;
             }
         }
 
-        nombreInput.addEventListener('input', updateAvatar);
-        avatarUrlInput.addEventListener('input', updateAvatar);
+        nombreInput.addEventListener('input', updateAvatarFromName);
     </script>
 </body>
 </html>

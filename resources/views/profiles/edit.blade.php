@@ -19,7 +19,7 @@
         </header>
 
         <div class="profile-form-container">
-            <form action="{{ route('user-profiles.update', $profile->id) }}" method="POST" class="profile-form">
+            <form action="{{ route('user-profiles.update', $profile->id) }}" method="POST" enctype="multipart/form-data" class="profile-form">
                 @csrf
                 @method('PUT')
                 
@@ -50,16 +50,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="avatar_url">URL del Avatar</label>
-                    <input 
-                        type="url" 
-                        id="avatar_url" 
-                        name="avatar_url" 
-                        class="form-control @error('avatar_url') is-invalid @enderror" 
-                        value="{{ old('avatar_url', $profile->avatar_url) }}"
-                        placeholder="https://ejemplo.com/imagen.jpg"
-                    >
-                    @error('avatar_url')
+                    <label for="avatar_file">Cambiar foto de perfil</label>
+                    <div class="file-upload-container">
+                        <input 
+                            type="file" 
+                            id="avatar_file" 
+                            name="avatar_file" 
+                            class="file-input @error('avatar_file') is-invalid @enderror"
+                            accept="image/jpeg,image/png,image/jpg,image/gif"
+                        >
+                        <label for="avatar_file" class="file-upload-label">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span id="fileName">Seleccionar nueva imagen</span>
+                        </label>
+                    </div>
+                    <small class="form-hint">Formatos: JPG, PNG, GIF (máx. 2MB). Deja vacío para mantener la imagen actual.</small>
+                    @error('avatar_file')
                         <span class="error-message">{{ $message }}</span>
                     @enderror
                 </div>
@@ -92,13 +100,25 @@
     </div>
 
     <script>
-        // Actualizar preview del avatar en tiempo real
-        const avatarUrlInput = document.getElementById('avatar_url');
+        // Preview de imagen subida
+        const avatarFileInput = document.getElementById('avatar_file');
         const avatarImg = document.getElementById('avatarImg');
+        const fileNameSpan = document.getElementById('fileName');
 
-        avatarUrlInput.addEventListener('input', function() {
-            if (this.value) {
-                avatarImg.src = this.value;
+        avatarFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Actualizar nombre del archivo
+                fileNameSpan.textContent = file.name;
+                
+                // Mostrar preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    avatarImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                fileNameSpan.textContent = 'Seleccionar nueva imagen';
             }
         });
     </script>
