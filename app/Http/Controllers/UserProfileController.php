@@ -34,7 +34,7 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'nombre_perfil' => 'required|string|max:50',
-            'avatar_url' => 'nullable|url',
+            'avatar_file' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'es_niño' => 'boolean'
         ]);
 
@@ -46,10 +46,22 @@ class UserProfileController extends Controller
             return back()->with('error', 'Has alcanzado el límite máximo de 5 perfiles.');
         }
 
+        // Manejar subida de imagen
+        $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($request->nombre_perfil) . '&background=FFD700&color=001F3F&size=200';
+        
+        if ($request->hasFile('avatar_file')) {
+            $file = $request->file('avatar_file');
+            $imageData = file_get_contents($file->getRealPath());
+            $base64 = base64_encode($imageData);
+            $mimeType = $file->getMimeType();
+            // Guardar como data URL (base64) en MongoDB
+            $avatarUrl = 'data:' . $mimeType . ';base64,' . $base64;
+        }
+
         Profile::create([
             'user_id' => $user->id,
             'nombre_perfil' => $request->nombre_perfil,
-            'avatar_url' => $request->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode($request->nombre_perfil) . '&background=FFD700&color=001F3F&size=200',
+            'avatar_url' => $avatarUrl,
             'es_niño' => $request->has('es_niño')
         ]);
 
@@ -85,13 +97,25 @@ class UserProfileController extends Controller
 
         $request->validate([
             'nombre_perfil' => 'required|string|max:50',
-            'avatar_url' => 'nullable|url',
+            'avatar_file' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'es_niño' => 'boolean'
         ]);
 
+        $avatarUrl = $profile->avatar_url;
+
+        // Manejar subida de nueva imagen
+        if ($request->hasFile('avatar_file')) {
+            $file = $request->file('avatar_file');
+            $imageData = file_get_contents($file->getRealPath());
+            $base64 = base64_encode($imageData);
+            $mimeType = $file->getMimeType();
+            // Guardar como data URL (base64) en MongoDB
+            $avatarUrl = 'data:' . $mimeType . ';base64,' . $base64;
+        }
+
         $profile->update([
             'nombre_perfil' => $request->nombre_perfil,
-            'avatar_url' => $request->avatar_url ?? $profile->avatar_url,
+            'avatar_url' => $avatarUrl,
             'es_niño' => $request->has('es_niño')
         ]);
 
