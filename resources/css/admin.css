@@ -1,20 +1,16 @@
-/*
- * ===================================
- * ESTILOS DEL PANEL DE ADMINISTRADOR
- * ===================================
- */
-body {
+
+.admin-body {
     display: flex;
-    background-color: #111827; /* bg-gray-900 */
-    color: #f3f4f6; /* text-gray-100 */
+    background-color: #111827; 
+    color: #f3f4f6; 
 }
 .admin-sidebar {
     width: 250px;
-    background-color: #1f2937; /* bg-gray-800 */
+    background-color: #1f2937; 
     height: 100vh;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-    position: fixed; /* Fijo en la pantalla */
+    position: fixed; 
 }
 .admin-sidebar h2 {
     font-size: 1.5rem;
@@ -24,7 +20,7 @@ body {
 }
 .admin-sidebar a {
     display: block;
-    color: #d1d5db; /* text-gray-300 */
+    color: #d1d5db;
     padding: 12px 15px;
     text-decoration: none;
     border-radius: 8px;
@@ -32,11 +28,11 @@ body {
     transition: background 0.2s, color 0.2s;
 }
 .admin-sidebar a:hover {
-    background-color: #e11d48; /* Color acento (rojo) */
+    background-color: #e11d48; 
     color: white;
 }
 .admin-sidebar form button {
-    background: #4b5563; /* bg-gray-600 */
+    background: #4b5563; 
     color: white; 
     padding: 10px; 
     border: none; 
@@ -47,13 +43,13 @@ body {
     transition: background 0.2s;
 }
  .admin-sidebar form button:hover {
-    background: #374151; /* bg-gray-700 */
+    background: #374151; 
  }
 
 .admin-content {
-    flex-grow: 1; /* Ocupa el resto del espacio */
+    flex-grow: 1; 
     padding: 40px;
     height: 100vh;
-    overflow-y: auto; /* Permite scroll */
-    margin-left: 250px; /* Deja espacio para la barra lateral fija */
+    overflow-y: auto;
+    margin-left: 250px; 
 }

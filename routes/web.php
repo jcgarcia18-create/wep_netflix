@@ -20,7 +20,6 @@ Route::get('/', function () {
 
 // Ruta del dashboard de USUARIO NORMAL
 Route::get('/dashboard', function () {
-    
     // --- 1. LÓGICA DEL CATÁLOGO GENERAL 
     $peliculas = Peliculas::all(); // Obtiene todas las películas de Postgres
 
@@ -38,10 +37,10 @@ Route::get('/dashboard', function () {
         $historial = HistorialVista::where('perfil_id', $perfilId)
                                     ->orderBy('updated_at', 'desc')
                                     ->take(10)
-                                    ->pluck('pelicula_id'); // IDs de Postgres
+                                    ->pluck('pelicula_id'); 
         
         if ($historial->count() > 0) {
-            // Busca las películas en Postgres y las reordena
+            
             $peliculasSeguirViendo = Peliculas::findMany($historial)
                                           ->sortBy(function ($pelicula) use ($historial) {
                                               return array_search($pelicula->id, $historial->toArray());
@@ -49,7 +48,7 @@ Route::get('/dashboard', function () {
         }
     }
     
-    // --- 3. DEVUELVE LA VISTA 
+
     return view('dashboard', [
         'peliculas' => $peliculas,
         'peliculasSeguirViendo' => $peliculasSeguirViendo,

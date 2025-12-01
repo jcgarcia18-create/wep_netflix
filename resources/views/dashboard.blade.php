@@ -97,7 +97,6 @@
                             <path d="M12 16v-4m0-4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                         Ayuda
-                        
                     </a>
                     <div class="profile-menu-divider"></div>
                     <form method="POST" action="{{ route('logout') }}">
@@ -117,7 +116,7 @@
 
 
     <main class="content">
-        <!-- Secciones dinámicas por género -->
+       
         @php
             // Obtener todos los géneros únicos, aunque estén en campos con múltiples géneros separados por coma
             $allGenres = collect();
