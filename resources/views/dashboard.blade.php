@@ -71,20 +71,14 @@
                         </svg>
                         Ajustes
                     </a>
-                    <a href="#" class="profile-menu-item">
+                    <a href="{{ route('account.index') }}" class="profile-menu-item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
                         </svg>
                         Cuenta
                     </a>
-                    <a href="#" class="profile-menu-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2" y="7" width="20" height="15" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 7V5a4 4 0 00-8 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Suscripción
-                    </a>
+                
                     <a href="#" class="profile-menu-item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>

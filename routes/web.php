@@ -9,6 +9,7 @@ use App\Http\Controllers\NetflixProfileController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlaybackController;
+use App\Http\Controllers\AccountController;
 use App\Http\Middleware\CheckSubscription;
 use App\Models\HistorialVista;
 use App\Models\Peliculas;
@@ -96,6 +97,11 @@ Route::middleware('auth')->group(function () {
     // Rutas para ajustes
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/toggle-dark-mode', [SettingsController::class, 'toggleDarkMode'])->name('settings.toggle-dark-mode');
+    
+    //-----------------------------------------------------------------------------------------------
+    // Rutas para cuenta
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+    Route::put('/account', [AccountController::class, 'update'])->name('account.update');
 });
 
 // Carga rutas de login, register, logout

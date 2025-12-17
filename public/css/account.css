@@ -1,0 +1,510 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #0b0c0f;
+    color: #e5e5e5;
+}
+
+body.light-mode {
+    background-color: #ffffff;
+    color: #1a1a1a;
+}
+
+/* Header */
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .account-header {
+    background-color: #14151a;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.light-mode .account-header {
+    background-color: #f9f9f9;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.dark-mode .logo {
+    color: #ffffff;
+}
+
+.light-mode .logo {
+    color: #1a1a1a;
+}
+
+.logo span {
+    background: linear-gradient(135deg, #0a6bff 0%, #00d9ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.dark-mode .nav-link {
+    color: #b3b3b3;
+}
+
+.light-mode .nav-link {
+    color: #666666;
+}
+
+.nav-link:hover {
+    color: #0a6bff;
+}
+
+.user-info svg {
+    color: #b3b3b3;
+}
+
+/* Main Content */
+.account-content {
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.account-container {
+    max-width: 800px;
+}
+
+.account-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.dark-mode .account-title {
+    color: #ffffff;
+}
+
+.light-mode .account-title {
+    color: #1a1a1a;
+}
+
+/* Account Section */
+.account-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.dark-mode .account-section {
+    background-color: #1a1b21;
+}
+
+.light-mode .account-section {
+    background-color: #f5f5f5;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .section-title {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.light-mode .section-title {
+    color: #1a1a1a;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Account Items */
+.account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.dark-mode .account-item {
+    background-color: #22232a;
+}
+
+.light-mode .account-item {
+    background-color: #ffffff;
+}
+
+.account-item:hover {
+    background-color: rgba(10, 107, 255, 0.05);
+}
+
+.account-item.clickable {
+    cursor: pointer;
+}
+
+.item-content {
+    flex: 1;
+}
+
+.item-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dark-mode .item-label {
+    color: #8a8a8a;
+}
+
+.light-mode .item-label {
+    color: #666666;
+}
+
+.item-value {
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.dark-mode .item-value {
+    color: #e5e5e5;
+}
+
+.light-mode .item-value {
+    color: #1a1a1a;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.dark-mode .edit-btn {
+    color: #8a8a8a;
+}
+
+.light-mode .edit-btn {
+    color: #666666;
+}
+
+.edit-btn:hover {
+    background-color: rgba(10, 107, 255, 0.1);
+    color: #0a6bff;
+}
+
+.edit-btn svg {
+    display: block;
+}
+
+/* Subscription Card */
+.subscription-card {
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid;
+}
+
+.subscription-card.active {
+    border-color: #00d97e;
+    background-color: rgba(0, 217, 126, 0.05);
+}
+
+.subscription-card.inactive {
+    border-color: #ff4757;
+    background-color: rgba(255, 71, 87, 0.05);
+}
+
+.subscription-status {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.subscription-status.active {
+    color: #00d97e;
+}
+
+.subscription-status.inactive {
+    color: #ff4757;
+}
+
+.subscription-details p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.dark-mode .subscription-details p {
+    color: #b3b3b3;
+}
+
+.light-mode .subscription-details p {
+    color: #666666;
+}
+
+.expiration-date {
+    font-weight: 500;
+}
+
+.dark-mode .expiration-date {
+    color: #e5e5e5;
+}
+
+.light-mode .expiration-date {
+    color: #1a1a1a;
+}
+
+.subscribe-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #0a6bff 0%, #00d9ff 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(10, 107, 255, 0.3);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .modal-content {
+    background-color: #1a1b21;
+}
+
+.light-mode .modal-content {
+    background-color: #ffffff;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.light-mode .modal-header {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.dark-mode .close-btn {
+    color: #b3b3b3;
+}
+
+.light-mode .close-btn {
+    color: #666666;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.dark-mode .form-group label {
+    color: #e5e5e5;
+}
+
+.light-mode .form-group label {
+    color: #1a1a1a;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.dark-mode .form-group input {
+    background-color: #22232a;
+    border-color: #3a3b42;
+    color: #e5e5e5;
+}
+
+.light-mode .form-group input {
+    background-color: #f5f5f5;
+    border-color: #d0d0d0;
+    color: #1a1a1a;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0a6bff;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.btn-cancel,
+.btn-save {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid;
+}
+
+.dark-mode .btn-cancel {
+    color: #b3b3b3;
+    border-color: #3a3b42;
+}
+
+.light-mode .btn-cancel {
+    color: #666666;
+    border-color: #d0d0d0;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #0a6bff 0%, #00d9ff 100%);
+    color: #ffffff;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .account-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .account-content {
+        padding: 1.5rem;
+    }
+
+    .account-title {
+        font-size: 2rem;
+    }
+
+    .account-section {
+        padding: 1.5rem;
+    }
+
+    .account-item {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+}
