@@ -20,41 +20,39 @@ Route::get('/', function () {
 
 // Ruta del dashboard de USUARIO NORMAL
 Route::get('/dashboard', function () {
-    // --- 1. LÓGICA DEL CATÁLOGO GENERAL 
-    $peliculas = Peliculas::all(); // Obtiene todas las películas de Postgres
+    // --- LÓGICA DE PERFIL Y CATÁLOGO ---
+    $perfilId = session('active_profile_id');
+    $activeProfile = $perfilId ? \App\Models\Profile::find($perfilId) : null;
 
-    // --- 2. LÓGICA DE "SEGUIR VIENDO" 
-    $perfilId = session('active_profile_id'); // Obtiene el perfil de la sesión
-    
-    $peliculasSeguirViendo = collect(); // Crea una lista vacía por si no hay historial
-    $activeProfile = null; // Perfil activo
+    if ($activeProfile && $activeProfile->es_niño) {
+        // Perfil de niño: solo películas de animación
+        $peliculas = Peliculas::where('genre', 'LIKE', '%Animacion%')->get();
+    } else {
+        // Perfil de adulto: todas las películas
+        $peliculas = Peliculas::all();
+    }
 
-    if ($perfilId) {
-        // Obtener el perfil activo desde MongoDB
-        $activeProfile = \App\Models\Profile::find($perfilId);
-        
-        // Busca en MongoDB el historial de ESE perfil
+    // --- LÓGICA DE "SEGUIR VIENDO" ---
+    $peliculasSeguirViendo = collect();
+    if ($activeProfile) {
         $historial = HistorialVista::where('perfil_id', $perfilId)
-                                    ->orderBy('updated_at', 'desc')
-                                    ->take(10)
-                                    ->pluck('pelicula_id'); 
-        
+            ->orderBy('updated_at', 'desc')
+            ->take(10)
+            ->pluck('pelicula_id');
+
         if ($historial->count() > 0) {
-            
             $peliculasSeguirViendo = Peliculas::findMany($historial)
-                                          ->sortBy(function ($pelicula) use ($historial) {
-                                              return array_search($pelicula->id, $historial->toArray());
-                                          });
+                ->sortBy(function ($pelicula) use ($historial) {
+                    return array_search($pelicula->id, $historial->toArray());
+                });
         }
     }
-    
 
     return view('dashboard', [
         'peliculas' => $peliculas,
         'peliculasSeguirViendo' => $peliculasSeguirViendo,
-        'activeProfile' => $activeProfile
+        'activeProfile' => $activeProfile,
     ]);
-
 })->middleware([
     'auth',
     'verified',
