@@ -14,6 +14,7 @@ use App\Http\Controllers\PrivacyController;
 use App\Http\Middleware\CheckSubscription;
 use App\Models\HistorialVista;
 use App\Models\Peliculas;
+use Illuminate\Support\Facades\Password;
 
 
 Route::get('/', function () {

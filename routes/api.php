@@ -3,11 +3,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\PeliculasApiController;
+use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\FavoritoController;
 use App\Models\User;
 
+// Ruta de prueba
+Route::get('/test', function () {
+    return response()->json(['message' => 'GET API funcionando']);
+});
+
+Route::post('/test-post', function () {
+    return response()->json(['message' => 'POST API funcionando']);
+});
+
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
+
+// Rutas de recuperación de contraseña con código (sin autenticación)
+Route::withoutMiddleware(['web'])->group(function () {
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetCode']);
+    Route::post('/validate-code', [PasswordResetController::class, 'validateCode']);
+    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
