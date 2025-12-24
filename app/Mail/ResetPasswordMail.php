@@ -13,16 +13,17 @@ class ResetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    // Constructor - Recibe el enlace de recuperación
-    public function __construct(public string $resetLink)
+    // Constructor - Recibe el código de recuperación y el email del usuario
+    public function __construct(public string $resetCode, public string $userEmail)
     {
     }
 
-    // envelope - Define el asunto del email
+    // envelope - Define el asunto del email y el destinatario
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Recupera tu contraseña - Netflix',
+            to: $this->userEmail,
+            subject: 'Código de recuperación - Cinema UAS',
         );
     }
 
@@ -32,7 +33,7 @@ class ResetPasswordMail extends Mailable
         return new Content(
             view: 'emails.reset-password',
             with: [
-                'resetLink' => $this->resetLink,
+                'resetLink' => $this->resetCode,
             ]
         );
     }

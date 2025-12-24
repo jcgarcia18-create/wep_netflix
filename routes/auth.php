@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\ValidateCodeController;
+use App\Http\Controllers\Auth\ResetPasswordFormController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,19 @@ Route::middleware('guest')->group(function () {
 
     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
         ->name('password.email');
+
+    // Rutas para validar código y establecer nueva contraseña
+    Route::get('validate-code', [ValidateCodeController::class, 'show'])
+        ->name('password.validate');
+
+    Route::post('validate-code', [ValidateCodeController::class, 'verify'])
+        ->name('password.verify-code');
+
+    Route::get('reset-password-form', [ResetPasswordFormController::class, 'show'])
+        ->name('password.reset-form');
+
+    Route::post('reset-password-form', [ResetPasswordFormController::class, 'reset'])
+        ->name('password.update');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
         ->name('password.reset');

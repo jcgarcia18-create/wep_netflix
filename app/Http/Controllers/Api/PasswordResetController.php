@@ -43,12 +43,8 @@ class PasswordResetController extends Controller
                 'created_at' => now(),
             ]);
 
-            // Envía el código sin encriptar por email
-            Mail::raw("Tu código de recuperación es: {$codigo}\n\nEste código expirará en 15 minutos.\n\nNo compartir este código con nadie.", function ($message) use ($usuario) {
-                $message->to($usuario->email)
-                        ->subject('Código de recuperación - Netflix')
-                        ->from('netflix@example.com');
-            });
+            // Envía el código usando la clase Mailable
+            Mail::send(new \App\Mail\ResetPasswordMail($codigo, $validated['email']));
 
             return response()->json([
                 'success' => true,
