@@ -19,12 +19,14 @@ Route::post('/test-post', function () {
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
 
-// Rutas de recuperación de contraseña con código (sin autenticación)
-Route::withoutMiddleware(['web'])->group(function () {
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetCode']);
-    Route::post('/validate-code', [PasswordResetController::class, 'validateCode']);
-    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);
-});
+// Rutas públicas para recuperación de contraseña
+// Estas rutas NO requieren autenticación para permitir que usuarios olviden su contraseña
+// POST /api/password/send-code: Envía un código de 6 dígitos al correo del usuario
+// POST /api/password/validate-code: Valida que el código ingresado sea correcto y no haya expirado
+// POST /api/password/reset: Restablece la contraseña del usuario después de validar el código
+Route::post('/password/send-code', [PasswordResetController::class, 'sendCode']);
+Route::post('/password/validate-code', [PasswordResetController::class, 'validateCode']);
+Route::post('/password/reset', [PasswordResetController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
