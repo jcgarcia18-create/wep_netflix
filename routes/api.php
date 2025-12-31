@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\PeliculasApiController;
 use App\Http\Controllers\Api\PasswordResetController;
+use App\Http\Controllers\Api\ProfileApiController;
 use App\Http\Controllers\FavoritoController;
 use App\Models\User;
 
@@ -38,6 +39,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/favoritos/{peliculaId}', [FavoritoController::class, 'store']);
     Route::delete('/favoritos/{peliculaId}', [FavoritoController::class, 'destroy']);
     Route::get('/favoritos/check/{peliculaId}', [FavoritoController::class, 'check']);
+    
+    // Rutas de perfiles (adulto/niño) para Android
+    Route::get('/profiles', [ProfileApiController::class, 'index']);                    // Listar perfiles del usuario
+    Route::post('/profiles', [ProfileApiController::class, 'store']);                   // Crear perfil
+    Route::get('/profiles/{id}', [ProfileApiController::class, 'show']);                // Obtener un perfil
+    Route::put('/profiles/{id}', [ProfileApiController::class, 'update']);              // Editar perfil
+    Route::delete('/profiles/{id}', [ProfileApiController::class, 'destroy']);          // Eliminar perfil
+    Route::post('/profiles/{id}/select', [ProfileApiController::class, 'select']);      // Seleccionar perfil activo
 });
 
 
