@@ -5,17 +5,9 @@ use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\PeliculasApiController;
 use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\ProfileApiController;
+use App\Http\Controllers\Api\StripeApiController;
 use App\Http\Controllers\FavoritoController;
 use App\Models\User;
-
-// Ruta de prueba
-Route::get('/test', function () {
-    return response()->json(['message' => 'GET API funcionando']);
-});
-
-Route::post('/test-post', function () {
-    return response()->json(['message' => 'POST API funcionando']);
-});
 
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
@@ -28,6 +20,14 @@ Route::post('/login', [AuthApiController::class, 'login']);
 Route::post('/password/send-code', [PasswordResetController::class, 'sendCode']);
 Route::post('/password/validate-code', [PasswordResetController::class, 'validateCode']);
 Route::post('/password/reset', [PasswordResetController::class, 'resetPassword']);
+
+// Rutas públicas de Stripe
+// Webhook de Stripe (sin autenticación, valida firma de Stripe)
+Route::post('/stripe/webhook', [StripeApiController::class, 'webhook']);
+
+// Callbacks de Stripe (pueden ser llamadas desde navegador después del pago)
+Route::get('/stripe/success', [StripeApiController::class, 'success']);
+Route::get('/stripe/cancel', [StripeApiController::class, 'cancel']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
@@ -47,26 +47,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/profiles/{id}', [ProfileApiController::class, 'update']);              // Editar perfil
     Route::delete('/profiles/{id}', [ProfileApiController::class, 'destroy']);          // Eliminar perfil
     Route::post('/profiles/{id}/select', [ProfileApiController::class, 'select']);      // Seleccionar perfil activo
-});
-
-
-//api para traerme todos los usuarios
-Route::get('/users', function () {
-    return response()->json(User::all());
-});
-
-//api para contar todos los usuarios
-Route::get('/users/count', function () {
-    return response()->json(['count' => User::count()]);
-});
-
-//api para traer usuarios por id
-Route::get('/users/{id}', function ($id) {
-    $user = User::find($id);
-    if ($user) {
-        return response()->json($user);
-    }
-    return response()->json(['error' => 'Usuario no encontrado'], 404);
+    
+    // Rutas de Stripe para Android (protegidas con autenticación)
+    Route::post('/stripe/create-checkout-session', [StripeApiController::class, 'createCheckoutSession']);
+    Route::get('/subscription/status', [StripeApiController::class, 'getSubscriptionStatus']);
+    Route::post('/subscription/verify', [StripeApiController::class, 'verifySubscription']);
 });
 
 // Endpoints para películas
