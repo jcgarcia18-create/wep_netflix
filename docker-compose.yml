@@ -6,6 +6,8 @@ services:
     depends_on:
       - mongo_db
       - postgres_db
+    volumes:
+      - ./:/var/www
     networks:
       - netflix
 

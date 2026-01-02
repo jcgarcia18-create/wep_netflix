@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #001F3F 0%, #012040 100%);
+    color: #e5e5e5;
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(20, 21, 26, 0.95);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    transform: translateX(-5px);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.header svg {
+    width: 48px;
+    height: 48px;
+    color: #FFD700;
+    flex-shrink: 0;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #FFD700;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+}
+
+li strong {
+    color: #FFD700;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+li:not(:has(strong)) {
+    color: #d1d5db;
+}
+
+.footer-note {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    text-align: center;
+    color: #FFD700;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    li {
+        padding: 1rem;
+    }
+
+    li strong {
+        font-size: 1rem;
+    }
+}
