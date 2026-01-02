@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlaybackController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\AyudaController;
 use App\Http\Middleware\CheckSubscription;
 use App\Models\HistorialVista;
 use App\Models\Peliculas;
@@ -108,6 +109,10 @@ Route::middleware('auth')->group(function () {
     //-----------------------------------------------------------------------------------------------
     // Rutas para privacidad y términos
     Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy.index');
+    
+    //-----------------------------------------------------------------------------------------------
+    // Ruta para ayuda
+    Route::get('/ayuda', [AyudaController::class, 'index'])->name('ayuda');
 });
 
 // Carga rutas de login, register, logout
@@ -146,7 +151,3 @@ Route::get('/test-mongo', function () {
     $profile->save();
     return 'Perfil creado en MongoDB';
 });
-
-Route::get('/ayuda', function () {
-    return view('ayuda');
-})->name('ayuda');

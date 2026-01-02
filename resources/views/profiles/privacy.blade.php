@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacidad y Términos - Cinemas Aguilas Uas</title>
-    <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
+    @vite('resources/css/privacy.css')
 </head>
 <body class="{{ session('dark_mode', true) ? 'dark-mode' : 'light-mode' }}">
     
