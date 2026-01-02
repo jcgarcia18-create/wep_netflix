@@ -146,3 +146,7 @@ Route::get('/test-mongo', function () {
     $profile->save();
     return 'Perfil creado en MongoDB';
 });
+
+Route::get('/ayuda', function () {
+    return view('ayuda');
+})->name('ayuda');
