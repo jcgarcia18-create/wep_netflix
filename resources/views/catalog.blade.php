@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Catálogo - Cinema Águilas UAS</title>
-    <link rel="stylesheet" href="{{ asset('css/catalog.css') }}">
+    @vite('resources/css/catalog.css')
 </head>
 <body>
 
