@@ -60,6 +60,6 @@ class NetflixProfileController extends Controller
         session(['active_profile_id' => $profile->id]);
 
        
-        return redirect()->route('dashboard'); 
+        return redirect()->route('home'); 
     }
 }

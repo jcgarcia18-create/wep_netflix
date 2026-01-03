@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Nueva Contraseña</title>
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    @vite('resources/css/register.css')
 </head>
 <body>
     <main>

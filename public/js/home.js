@@ -1,4 +1,4 @@
-// JS de dashboard
+// JS de home
 
 function openMovieTab(peliculaJson) {
     const pelicula = JSON.parse(peliculaJson);
@@ -43,7 +43,7 @@ function openMovieTab(peliculaJson) {
                 <div class="meta">${pelicula.genre} · ${pelicula.duration_minutes} min</div>
                 <div class="desc">${pelicula.description}</div>
                 <a href="javascript:void(0)" class="btn-play" onclick="clickReproducir()">▶ Reproducir</a>
-                <button class="btn-back" onclick="window.close()">Volver al dashboard</button>
+                <button class="btn-back" onclick="window.close()">Volver al inicio</button>
             </div>
         </body>
         </html>+
@@ -66,7 +66,7 @@ function logView(peliculaId, videoUrl) {
         return false;
     }
     const data = { pelicula_id: idNum };
-    fetch(window.dashboardPlaybackLogRoute, {
+    fetch(window.homePlaybackLogRoute, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

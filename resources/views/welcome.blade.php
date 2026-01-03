@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinema Águilas UAS</title>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    @vite('resources/css/welcome.css')
 </head>
 <body>
     <header>
@@ -19,7 +19,6 @@
 
     <main>
         <section class="hero">
-            <div class="overlay"></div>
             <div class="hero-content">
                 <h2 class="subtitle">Tu cine en casa, fácil y rápido</h2>
                 <h1 class="title">Disfruta de tus películas y series favoritas en cualquier dispositivo</h1>
