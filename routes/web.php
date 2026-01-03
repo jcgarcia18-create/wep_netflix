@@ -22,8 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Ruta del dashboard de USUARIO NORMAL
-Route::get('/dashboard', function () {
+// Ruta del home de USUARIO NORMAL
+Route::get('/home', function () {
     // --- LÓGICA DE PERFIL Y CATÁLOGO ---
     $perfilId = session('active_profile_id');
     $activeProfile = $perfilId ? \App\Models\Profile::find($perfilId) : null;
@@ -52,7 +52,7 @@ Route::get('/dashboard', function () {
         }
     }
 
-    return view('dashboard', [
+    return view('home', [
         'peliculas' => $peliculas,
         'peliculasSeguirViendo' => $peliculasSeguirViendo,
         'activeProfile' => $activeProfile,
@@ -62,7 +62,7 @@ Route::get('/dashboard', function () {
     'verified',
     'profile.selected',
     CheckSubscription::class
-])->name('dashboard');
+])->name('home');
 
 Route::get('/catalog', function () {
     $peliculas = Peliculas::all();

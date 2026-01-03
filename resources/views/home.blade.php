@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinemas Aguilas Uas - Home</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    @vite('resources/css/home.css')
     @php $urls = $peliculas->pluck('video_url', 'id'); @endphp
     <script>
-        window.dashboardPlaybackLogRoute = "{{ route('playback.log') }}";
+        window.homePlaybackLogRoute = "{{ route('playback.log') }}";
     window.peliculaUrls = JSON.parse('{!! addslashes(json_encode($urls)) !!}');
     </script>
-    <script src="{{ asset('js/dashboard.js') }}" defer></script>
+    <script src="{{ asset('js/home.js') }}" defer></script>
 </head>
 <body class="{{ session('dark_mode', true) ? 'dark-mode' : 'light-mode' }}">
 

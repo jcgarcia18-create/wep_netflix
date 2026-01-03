@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/css/privacy.css',
                 'resources/css/profiles-admin.css',
                 'resources/css/account.css',
-                'resources/css/dashboard.css',
+                'resources/css/home.css',
                 'resources/css/catalog.css',
                 'resources/css/register.css',
                 'resources/css/welcome.css',

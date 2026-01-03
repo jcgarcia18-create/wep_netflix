@@ -58,7 +58,7 @@
     <div class="stripe-container">
         <h2 class="stripe-title">¡Pago exitoso!</h2>
         <p class="stripe-text">Tu suscripción ha sido activada. ¡Disfruta de todo el contenido premium!</p>
-        <a href="{{ route('dashboard') }}" class="btn-stripe">Ir al Dashboard</a>
+        <a href="{{ route('home') }}" class="btn-stripe">Ir al Inicio</a>
     </div>
 </body>
 </html>

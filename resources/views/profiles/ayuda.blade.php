@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="/dashboard" class="back-link">← Volver al inicio</a>
+        <a href="/home" class="back-link">← Volver al inicio</a>
         
         <div class="header">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
             <li><strong>Agregar una película a favoritos:</strong> Haz clic en el ícono de "Favorito" (⭐) en la película.</li>
             <li><strong>Quitar una película de favoritos:</strong> Ve a favoritos y haz clic en "Quitar" (❌).</li>
             <li><strong>Cambiar de perfil:</strong> Haz clic en tu avatar/nombre y selecciona otro perfil.</li>
-            <li><strong>Navegar entre secciones:</strong> Usa el menú principal para ir al dashboard, películas, favoritos, ajustes y ayuda.</li>
+            <li><strong>Navegar entre secciones:</strong> Usa el menú principal para ir al inicio, películas, favoritos, ajustes y ayuda.</li>
         </ul>
 
         <div class="footer-note">
