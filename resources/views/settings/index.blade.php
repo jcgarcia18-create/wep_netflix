@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajustes - Cinemas Aguilas Uas</title>
-    <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
+    @vite('resources/css/settings.css')
 </head>
 <body class="{{ session('dark_mode') ? 'dark-mode' : '' }}">
     <div class="settings-container">
         <header class="settings-header">
-            <a href="{{ route('dashboard') }}" class="back-btn">
+            <a href="{{ route('home') }}" class="back-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

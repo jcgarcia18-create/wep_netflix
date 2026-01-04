@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil - Cinemas Aguilas Uas</title>
-    <link rel="stylesheet" href="{{ asset('css/profiles-admin.css') }}">
+    @vite('resources/css/profiles-admin.css')
 </head>
 <body>
     <div class="profiles-container">

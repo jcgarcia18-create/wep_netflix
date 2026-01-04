@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacidad y Términos - Cinemas Aguilas Uas</title>
-    <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
+    @vite('resources/css/privacy.css')
 </head>
 <body class="{{ session('dark_mode', true) ? 'dark-mode' : 'light-mode' }}">
     
     <header class="privacy-header">
         <div class="logo">Cinemas<span>AguilasUas</span></div>
         <nav class="header-nav">
-            <a href="{{ route('dashboard') }}" class="nav-link">Inicio</a>
+            <a href="{{ route('home') }}" class="nav-link">Inicio</a>
         </nav>
     </header>
 
@@ -138,7 +138,7 @@
             </section>
 
             <div class="back-link">
-                <a href="{{ route('dashboard') }}" class="btn-back">
+                <a href="{{ route('home') }}" class="btn-back">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>

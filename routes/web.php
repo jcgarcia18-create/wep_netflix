@@ -11,17 +11,19 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PlaybackController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\AyudaController;
 use App\Http\Middleware\CheckSubscription;
 use App\Models\HistorialVista;
 use App\Models\Peliculas;
+use Illuminate\Support\Facades\Password;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Ruta del dashboard de USUARIO NORMAL
-Route::get('/dashboard', function () {
+// Ruta del home de USUARIO NORMAL
+Route::get('/home', function () {
     // --- LÓGICA DE PERFIL Y CATÁLOGO ---
     $perfilId = session('active_profile_id');
     $activeProfile = $perfilId ? \App\Models\Profile::find($perfilId) : null;
@@ -50,7 +52,7 @@ Route::get('/dashboard', function () {
         }
     }
 
-    return view('dashboard', [
+    return view('home', [
         'peliculas' => $peliculas,
         'peliculasSeguirViendo' => $peliculasSeguirViendo,
         'activeProfile' => $activeProfile,
@@ -60,7 +62,7 @@ Route::get('/dashboard', function () {
     'verified',
     'profile.selected',
     CheckSubscription::class
-])->name('dashboard');
+])->name('home');
 
 Route::get('/catalog', function () {
     $peliculas = Peliculas::all();
@@ -107,6 +109,10 @@ Route::middleware('auth')->group(function () {
     //-----------------------------------------------------------------------------------------------
     // Rutas para privacidad y términos
     Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy.index');
+    
+    //-----------------------------------------------------------------------------------------------
+    // Ruta para ayuda
+    Route::get('/ayuda', [AyudaController::class, 'index'])->name('ayuda');
 });
 
 // Carga rutas de login, register, logout

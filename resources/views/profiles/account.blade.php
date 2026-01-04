@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta - Cinemas Aguilas Uas</title>
-    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+    @vite('resources/css/account.css')
 </head>
 <body class="{{ session('dark_mode', true) ? 'dark-mode' : 'light-mode' }}">
     
     <header class="account-header">
         <div class="logo">Cinemas<span>AguilasUas</span></div>
         <nav class="header-nav">
-            <a href="{{ route('dashboard') }}" class="nav-link">Inicio</a>
+            <a href="{{ route('home') }}" class="nav-link">Inicio</a>
         </nav>
         <div class="user-info">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

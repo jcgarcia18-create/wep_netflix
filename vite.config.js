@@ -4,16 +4,31 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/css/profiles.css',
+                'resources/css/privacy.css',
+                'resources/css/profiles-admin.css',
+                'resources/css/account.css',
+                'resources/css/home.css',
+                'resources/css/catalog.css',
+                'resources/css/register.css',
+                'resources/css/welcome.css',
+                'resources/css/settings.css',
+                'resources/css/admin.css',
+                'resources/css/ayuda.css',
+                'resources/css/peliculas-admin-modal.css',
+                'resources/js/app.js'
+            ],
             refresh: true,
         }),
     ],
      server: {
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: 5173,
         strictPort: true,
         hmr: {
-            host: '127.0.0.1',
+            host: 'localhost',
         },
     },
 });

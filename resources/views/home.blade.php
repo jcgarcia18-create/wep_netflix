@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinemas Aguilas Uas - Home</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ai-search.css') }}">
-    
+    @vite(['resources/css/home.css', 'resources/css/ai-search.css'])
+    @php $urls = $peliculas->pluck('video_url', 'id'); @endphp
     <script>
-        window.dashboardPlaybackLogRoute = "{{ route('playback.log') }}";
-        window.peliculaUrls = @json($peliculas->pluck('video_url', 'id'));
+        window.homePlaybackLogRoute = "{{ route('playback.log') }}";
+        window.peliculaUrls = JSON.parse('{!! addslashes(json_encode($urls)) !!}');
     </script>
-    <script src="{{ asset('js/dashboard.js') }}" defer></script>
+    <script src="{{ asset('js/home.js') }}" defer></script>
 </head>
 
 <body class="{{ session('dark_mode', true) ? 'dark-mode' : 'light-mode' }}">
@@ -53,6 +51,19 @@
                 <div class="profile-menu" id="profileMenu">
                     <a href="{{ route('profiles.index') }}" class="profile-menu-item">Cambiar de perfil</a>
                     <a href="{{ route('settings.index') }}" class="profile-menu-item">Ajustes</a>
+                    <a href="{{ route('privacy.index') }}" class="profile-menu-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Privacidad y Términos
+                    </a>
+                    <a href="{{ route('ayuda') }}" class="profile-menu-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 16v-4m0-4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Ayuda
+                    </a>
                     <div class="profile-menu-divider"></div>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
