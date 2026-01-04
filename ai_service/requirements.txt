@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+psycopg2-binary
+pydantic
+langchain-huggingface
+langchain-chroma
+langchain-core
+sentence-transformers

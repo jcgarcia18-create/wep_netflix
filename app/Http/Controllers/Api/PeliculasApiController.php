@@ -1,53 +1,78 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Peliculas;
 use App\Models\HistorialVista;
+use Illuminate\Support\Facades\Http; 
 
 class PeliculasApiController extends Controller
 {
-public function index(Request $request)
+    public function index(Request $request)
     {
-        if ($request->has('perfil_id')) {
+        if ($request->has('ai_search') && !empty($request->input('ai_search'))) {
             
-            $perfilId = $request->input('perfil_id');
-            
-            //  Busca en MongoDB el historial de ESE perfil
-            $historial = HistorialVista::where('perfil_id', $perfilId)
-                                        ->orderBy('updated_at', 'desc')
-                                        ->take(10)
-                                        ->pluck('pelicula_id'); // IDs de Postgres
+            $userQuery = $request->input('ai_search');
 
-            if ($historial->count() == 0) {
-                return response()->json([]); // Devuelve un array vacío si no hay historial
+            try {
+                $response = Http::timeout(5)->post('http://ai:8089/recomendar', [
+                    'prompt' => $userQuery
+                ]);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'No se pudo conectar con Python: ' . $e->getMessage()], 500);
             }
 
-            // 3. Busca las películas en Postgres y las reordena
+            if ($response->failed()) {
+                return response()->json(['error' => 'Python devolvió error: ' . $response->status()], 500);
+            }
+
+            $data = $response->json();
+            $idsOrdenados = $data['movie_ids'] ?? [];
+
+            if (empty($idsOrdenados)) {
+                return response()->json([]);
+            }
+
+            $peliculasEncontradas = Peliculas::whereIn('id', $idsOrdenados)->get();
+
+            $peliculasRanking = $peliculasEncontradas->sortBy(function ($modelo) use ($idsOrdenados) {
+                return array_search($modelo->id, $idsOrdenados);
+            })->values();
+
+            return response()->json($peliculasRanking);
+        }
+
+        if ($request->has('perfil_id')) {
+            $perfilId = $request->input('perfil_id');
+            
+            $historial = HistorialVista::where('perfil_id', $perfilId)
+                                       ->orderBy('updated_at', 'desc')
+                                       ->take(10)
+                                       ->pluck('pelicula_id');
+
+            if ($historial->count() == 0) {
+                return response()->json([]);
+            }
+
             $peliculas = Peliculas::findMany($historial)
                                   ->sortBy(function ($pelicula) use ($historial) {
                                       return array_search($pelicula->id, $historial->toArray());
                                   });
             
-            // 4. Devuelve la lista ordenada
             return response()->json($peliculas->values());
         }
         
-
-        
-        // --- Lógica de Género 
         $query = Peliculas::query();
         if ($request->has('genre')) {
             $genre = $request->input('genre');
             $query->where('genre', 'LIKE', "%$genre%");
         }
         
-        // --- Devuelve todas las películas si no hay filtros ---
         return response()->json($query->get());
     }
 
-    // GET /api/peliculas/{id}
     public function show($id)
     {
         $pelicula = Peliculas::find($id);

@@ -1,0 +1,142 @@
+.btn-search-ia-trigger {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-search-ia-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.ai-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.ai-modal-content {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.ai-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ai-modal-close:hover {
+    color: white;
+}
+
+.ai-search-input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ai-search-input-group input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #2a2a2a;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.ai-search-input-group input:focus {
+    border-color: #e50914;
+}
+
+.ai-search-btn {
+    padding: 12px 25px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.ai-search-btn:hover {
+    background: #f40612;
+}
+
+.ai-modal-title {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.ai-modal-subtitle {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#seccion-resultados-ia {
+    display: none;
+    padding: 20px 40px;
+    margin-top: 80px;
+}
+
+.grid-resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-card-result {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.movie-card-result:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.movie-card-result img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.movie-card-result h3 {
+    font-size: 14px;
+    margin-top: 5px;
+    color: white;
+}
