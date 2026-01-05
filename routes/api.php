@@ -52,6 +52,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/stripe/create-checkout-session', [StripeApiController::class, 'createCheckoutSession']);
     Route::get('/subscription/status', [StripeApiController::class, 'getSubscriptionStatus']);
     Route::post('/subscription/verify', [StripeApiController::class, 'verifySubscription']);
+    // Activar suscripción después de pago exitoso (llamado desde Android)
+    Route::post('/subscription/activate', [StripeApiController::class, 'activateSubscriptionAfterPayment']);
+    
+    // Endpoints de administración de suscripciones
+    Route::get('/subscription/active-users', [StripeApiController::class, 'getActiveSubscriptionUsers']);
+    Route::get('/subscription/statistics', [StripeApiController::class, 'getSubscriptionStatistics']);
 });
 
 // Endpoints para películas
