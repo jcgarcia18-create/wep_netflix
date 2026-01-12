@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProfileApiController;
 use App\Http\Controllers\Api\StripeApiController;
 use App\Http\Controllers\FavoritoController;
 use App\Models\User;
+use App\Http\Controllers\AdminController;
 
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
@@ -33,13 +34,32 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return response()->json($request->user());
     });
-    
+
     // Rutas de favoritos protegidas con autenticación
     Route::get('/favoritos', [FavoritoController::class, 'index']);
     Route::post('/favoritos/{peliculaId}', [FavoritoController::class, 'store']);
     Route::delete('/favoritos/{peliculaId}', [FavoritoController::class, 'destroy']);
     Route::get('/favoritos/check/{peliculaId}', [FavoritoController::class, 'check']);
-    
+
+    // ===== ADMINISTRACIÓN =====
+    Route::prefix('admin')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [AdminController::class, 'dashboard']);
+
+        // Usuarios
+        Route::get('/users', [AdminController::class, 'getUsers']);
+        Route::put('/users/{id}', [AdminController::class, 'updateUser']);
+        Route::delete('/users/{id}', [AdminController::class, 'deleteUser']);
+
+        // Películas
+        Route::get('/peliculas', [AdminController::class, 'getPeliculas']);
+        Route::post('/peliculas', [AdminController::class, 'storePelicula']);     // CREAR
+        Route::put('/peliculas/{id}', [AdminController::class, 'updatePelicula']); // EDITAR
+        Route::delete('/peliculas/{id}', [AdminController::class, 'deletePelicula']);
+
+        // Logs
+        Route::get('/logs', [AdminController::class, 'getLogs']);
+        });
     // Rutas de perfiles (adulto/niño) para Android
     Route::get('/profiles', [ProfileApiController::class, 'index']);                    // Listar perfiles del usuario
     Route::post('/profiles', [ProfileApiController::class, 'store']);                   // Crear perfil
@@ -47,14 +67,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/profiles/{id}', [ProfileApiController::class, 'update']);              // Editar perfil
     Route::delete('/profiles/{id}', [ProfileApiController::class, 'destroy']);          // Eliminar perfil
     Route::post('/profiles/{id}/select', [ProfileApiController::class, 'select']);      // Seleccionar perfil activo
-    
+
     // Rutas de Stripe para Android (protegidas con autenticación)
     Route::post('/stripe/create-checkout-session', [StripeApiController::class, 'createCheckoutSession']);
     Route::get('/subscription/status', [StripeApiController::class, 'getSubscriptionStatus']);
     Route::post('/subscription/verify', [StripeApiController::class, 'verifySubscription']);
     // Activar suscripción después de pago exitoso (llamado desde Android)
     Route::post('/subscription/activate', [StripeApiController::class, 'activateSubscriptionAfterPayment']);
-    
+
     // Endpoints de administración de suscripciones
     Route::get('/subscription/active-users', [StripeApiController::class, 'getActiveSubscriptionUsers']);
     Route::get('/subscription/statistics', [StripeApiController::class, 'getSubscriptionStatistics']);
@@ -64,4 +84,13 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/peliculas', [PeliculasApiController::class, 'index']); // Listar todas o filtrar por género
 Route::get('/peliculas/{id}', [PeliculasApiController::class, 'show']); // Ver detalles por ID
 
-    
+
+// ========== USUARIOS (LEGACY) ==========
+Route::get('/users', fn () => response()->json(User::all()));
+Route::get('/users/count', fn () => response()->json(['count' => User::count()]));
+Route::get('/users/{id}', function ($id) {
+    $user = User::find($id);
+    return $user
+        ? response()->json($user)
+        : response()->json(['error' => 'Usuario no encontrado'], 404);
+});
